@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.startyounguk.startyoungngo.modle.SignUpDetails;
 import com.startyounguk.startyoungngo.modle.Status;
+
 import com.startyounguk.startyoungngo.modle.Volenteer;
+
 import com.startyounguk.startyoungngo.service.AuthenticationService;
 import com.startyounguk.startyoungngo.service.SignUpService;
+
 import com.startyounguk.startyoungngo.service.VolunteerService;
 
 @RestController
@@ -29,16 +32,10 @@ public class StartYoungController {
 	@Autowired
 	private SignUpService signUpService;
 	
+
 	@Autowired
 	private VolunteerService volunteerService;
-	
-//	@GetMapping("/login")
-//	public boolean login(final @RequestParam Map<String, String> params) {
-//		
-//		return authenticationService.isLoginValid(params.get("mobile"), params.get("password"));
-//		
-//	}
-	
+
 	
 	@GetMapping("/loginUser")
 	public boolean isUserPresent(final @RequestParam Map<String, String> params) {
@@ -63,7 +60,6 @@ public class StartYoungController {
 			}
 				
 		}
-		
 
 	}
 	
