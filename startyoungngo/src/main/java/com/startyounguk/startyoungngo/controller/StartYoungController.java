@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.startyounguk.startyoungngo.dao.VolunteerDetails;
 import com.startyounguk.startyoungngo.modle.SignUpDetails;
 import com.startyounguk.startyoungngo.modle.Status;
 import com.startyounguk.startyoungngo.service.AuthenticationService;
+import com.startyounguk.startyoungngo.service.RegisterVolunteerService;
 import com.startyounguk.startyoungngo.service.SignUpService;
 
 @RestController
@@ -26,6 +28,8 @@ public class StartYoungController {
 	private AuthenticationService  authenticationService;
 	@Autowired
 	private SignUpService signUpService;
+	@Autowired
+	RegisterVolunteerService registerVolunteerService;
 	
 //	@GetMapping("/login")
 //	public boolean login(final @RequestParam Map<String, String> params) {
@@ -60,6 +64,26 @@ public class StartYoungController {
 		}
 		
 
+	}
+	
+	@PostMapping("/regvolunteer")
+	public Status registerVolunteer(final @RequestBody VolunteerDetails volunteerDetails) {
+		
+		if(volunteerDetails.getMobileNumber().length()!=10) {
+			System.out.println("Enter valid 10 digit mobile number");
+			return Status.FAILED;
+		}else {
+			Optional<VolunteerDetails> userOptional= registerVolunteerService.findUserByMobile(volunteerDetails);
+			
+			if(userOptional.isPresent()) {
+				System.out.println("User Already Exists");
+				return Status.ALREADY_EXISTS;
+			}else {
+				registerVolunteerService.saveVolunteer(volunteerDetails);
+				return Status.CREATED;
+			}
+				
+		}
 	}
 	
 
