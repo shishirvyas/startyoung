@@ -1,0 +1,97 @@
+<li><a class="nav-link scrollto" style="cursor:pointer" onclick="zoom()">A+</a></li>
+          <li><a class="nav-link scrollto" style="cursor:pointer" onclick="zoomout()">A-</a></li>
+          <li style="margin-left: 50px;"><%- include('common_scripts/translate')%></li>
+          <script>
+            zoomset()
+            function zoomset() {
+              console.log(1)
+              if(localStorage.getItem("zoom"))
+              {
+                console.log(parseInt(localStorage.getItem("zoom")))
+                document.body.style.zoom = localStorage.getItem("zoom")+"%";
+              }
+            }
+            function zoom() {
+              var zoom=100;
+              if(localStorage.getItem("zoom"))
+              {
+                zoom=parseInt(localStorage.getItem("zoom"))+10;
+                console.log(zoom)
+                document.body.style.zoom = zoom+"%"
+                localStorage.setItem("zoom",zoom)
+              }
+              else
+              {
+                document.body.style.zoom = "110%"
+                localStorage.setItem("zoom",110)
+              }
+              
+            } 
+            function zoomout() {
+              var zoom=100;
+              if(localStorage.getItem("zoom"))
+              {
+                zoom=parseInt(localStorage.getItem("zoom"))-10;
+                console.log(zoom)
+                document.body.style.zoom = zoom+"%"
+                localStorage.setItem("zoom",zoom)
+              }
+              else
+              {
+                document.body.style.zoom = "90%"
+                localStorage.setItem("zoom",90)
+              }
+              
+            } 
+         </script>
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+<!--CREATE NEW FILE CALLED translate.ejs OR SIMILAR IN JAVA LIKE JSP OR REPLACE <%- include('common_scripts/translate')%> WITH THE
+FOLLOWING LINE-->
+
+<style>
+	iframe.goog-te-banner-frame {
+		display: none;
+	}
+	
+	.goog-te-gadget-simple{
+		border: 0px;
+		background: transparent;
+	}
+
+	.goog-te-gadget-icon {
+		display: none;
+	}
+	
+</style>
+
+<div id="google_translate_element"></div>
+
+<script type="text/javascript">
+	function googleTranslateElementInit() {
+		new google.translate.TranslateElement(
+			{
+				pageLanguage: 'hi',
+				includedLanguages: 'en,hi,mr,bn,bh,gu,ks,ml,ne,te,ur,kn,sd,sa,pa,as',
+				layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+			},
+			'google_translate_element'
+		);
+	}
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
