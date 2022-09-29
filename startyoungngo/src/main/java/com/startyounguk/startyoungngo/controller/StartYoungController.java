@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.startyounguk.startyoungngo.dao.VolunteerDetails;
+import com.startyounguk.startyoungngo.modle.EmailSubscription;
 import com.startyounguk.startyoungngo.modle.SignUpDetails;
 import com.startyounguk.startyoungngo.modle.Status;
 import com.startyounguk.startyoungngo.service.AuthenticationService;
+import com.startyounguk.startyoungngo.service.EmailSubscriptionService;
 import com.startyounguk.startyoungngo.service.RegisterVolunteerService;
 import com.startyounguk.startyoungngo.service.SignUpService;
 
@@ -30,6 +31,8 @@ public class StartYoungController {
 	private SignUpService signUpService;
 	@Autowired
 	RegisterVolunteerService registerVolunteerService;
+	@Autowired
+	EmailSubscriptionService emailSubscriptionService;
 	
 //	@GetMapping("/login")
 //	public boolean login(final @RequestParam Map<String, String> params) {
@@ -84,6 +87,14 @@ public class StartYoungController {
 			}
 				
 		}
+	}
+	
+	@PostMapping("/subscribeemail")
+	public Status subscribeForEmail(final@RequestBody EmailSubscription emailSubscription) {
+		
+		emailSubscriptionService.saveEmail(emailSubscription);
+		
+		return Status.CREATED;
 	}
 	
 
